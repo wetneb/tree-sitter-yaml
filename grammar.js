@@ -64,6 +64,8 @@ module.exports = grammar({
 
     $._bl,
     $.comment,
+
+    $._err_rec,
   ],
 
   extras: $ => [$.comment],
