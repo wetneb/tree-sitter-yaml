@@ -1,6 +1,6 @@
 {
   "name": "@tree-sitter-grammars/tree-sitter-yaml",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "license": "MIT",
   "description": "YAML grammar for tree-sitter",
   "repository": "github:tree-sitter-grammars/tree-sitter-yaml",
@@ -37,8 +37,8 @@
     "node-gyp-build": "^4.8.0"
   },
   "devDependencies": {
-    "prebuildify": "^6.0.0",
-    "tree-sitter-cli": "^0.22.2"
+    "prebuildify": "^6.0.1",
+    "tree-sitter-cli": "^0.22.5"
   },
   "peerDependencies": {
     "tree-sitter": "^0.21.1"
