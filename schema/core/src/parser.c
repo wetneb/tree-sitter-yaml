@@ -89,17 +89,19 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
   switch (state) {
     case 0:
       if (eof) ADVANCE(34);
-      if (lookahead == '+' ||
-          lookahead == '-') ADVANCE(1);
-      if (lookahead == '.') ADVANCE(6);
-      if (lookahead == '0') ADVANCE(37);
-      if (lookahead == 'F') ADVANCE(2);
-      if (lookahead == 'N') ADVANCE(16);
-      if (lookahead == 'T') ADVANCE(13);
-      if (lookahead == 'f') ADVANCE(17);
-      if (lookahead == 'n') ADVANCE(29);
-      if (lookahead == 't') ADVANCE(26);
-      if (lookahead == '~') ADVANCE(35);
+      ADVANCE_MAP(
+        '.', 6,
+        '0', 37,
+        'F', 2,
+        'N', 16,
+        'T', 13,
+        'f', 17,
+        'n', 29,
+        't', 26,
+        '~', 35,
+        '+', 1,
+        '-', 1,
+      );
       if (('1' <= lookahead && lookahead <= '9')) ADVANCE(38);
       END_STATE();
     case 1:
@@ -313,7 +315,7 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [1] = {.entry = {.count = 1, .reusable = false}}, RECOVER(),
   [3] = {.entry = {.count = 1, .reusable = true}}, SHIFT(2),
   [5] = {.entry = {.count = 1, .reusable = false}}, SHIFT(2),
-  [7] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_scalar, 1),
+  [7] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_scalar, 1, 0, 0),
   [9] = {.entry = {.count = 1, .reusable = true}},  ACCEPT_INPUT(),
 };
 
@@ -328,7 +330,7 @@ extern "C" {
 #define TS_PUBLIC __attribute__((visibility("default")))
 #endif
 
-TS_PUBLIC const TSLanguage *tree_sitter_core_schema() {
+TS_PUBLIC const TSLanguage *tree_sitter_core_schema(void) {
   static const TSLanguage language = {
     .version = LANGUAGE_VERSION,
     .symbol_count = SYMBOL_COUNT,

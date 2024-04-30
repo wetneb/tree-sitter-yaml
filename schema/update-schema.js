@@ -16,6 +16,9 @@ readFile(join(__dirname, schema, "src", "parser.c"), "utf8").then(input => {
     cases
       .map(([key, { content }]) => `${(key === "default" ? "default:" : `case ${key}:`)}\n${indent(content)}`)
       .join("\n  END_STATE();\n")
+      .replace(/\s+ADVANCE_MAP\(([^]+?)\);\n/, (_, map) => {
+        return map.replace(/'(.)', (\d+),/g, "if (lookahead == '$1') ADVANCE($2);");
+      })
       .replace(/ADVANCE\((\d+)\);/g, (_, state) => {
         const stateCase = cases.find(([key]) => key === state);
         if (stateCase) {

@@ -161,8 +161,9 @@ static inline bool set_contains(TSCharacterRange *ranges, uint32_t len, int32_t 
 #define START_LEXER()           \
   bool result = false;          \
   bool skip = false;            \
-  UNUSED bool eof = false;      \
-  UNUSED int32_t lookahead;     \
+  UNUSED                        \
+  bool eof = false;             \
+  int32_t lookahead;            \
   goto start;                   \
   next_state:                   \
   lexer->advance(lexer, skip);  \
@@ -244,7 +245,7 @@ static inline bool set_contains(TSCharacterRange *ranges, uint32_t len, int32_t 
       .child_count = children,                             \
       .dynamic_precedence = precedence,                    \
       .production_id = prod_id                             \
-    }                                                      \
+    },                                                     \
   }}
 
 #define RECOVER()                    \
