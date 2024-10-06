@@ -49,11 +49,10 @@
     }
   },
   "scripts": {
-    "build": "tree-sitter generate --no-bindings",
-    "postbuild": "npm run --prefix schema/core build",
-    "test": "tree-sitter test",
     "install": "node-gyp-build",
-    "prebuildify": "prebuildify --napi --strip"
+    "prestart": "tree-sitter build --wasm",
+    "start": "tree-sitter playground",
+    "test": "node --test bindings/node/*_test.js"
   },
   "publishConfig": {
     "access": "public"
