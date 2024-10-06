@@ -36,6 +36,8 @@ jobs:
           submodules: true
       - name: Set up tree-sitter
         uses: tree-sitter/setup-action/cli@v1
+        with:
+          tree-sitter-ref: v0.23.2
       - name: Run tests
         uses: tree-sitter/parser-test-action@v2
         with:
